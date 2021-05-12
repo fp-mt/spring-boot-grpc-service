@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-boot-grpc-service
+    backstage.io/kubernetes-id: spring-boot-grpc-service
+  name: spring-boot-grpc-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-grpc-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-boot-grpc-service
+        backstage.io/kubernetes-id: spring-boot-grpc-service
+    spec:
+      containers:
+      - image: spring-boot-grpc-service:0.0.1-SNAPSHOT
+        imagePullPolicy: Never
+        name: spring-boot-grpc-service
+        resources: {}
+        ports:
+          - containerPort: 8080 
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          periodSeconds: 5
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-boot-grpc-service
+    backstage.io/kubernetes-id: spring-boot-grpc-service
+  name: spring-boot-grpc-service
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: spring-boot-grpc-service
+  type: ClusterIP
+status:
+  loadBalancer: {}
