@@ -4,7 +4,7 @@ flex:
     build:
       command: ./mvnw spring-boot:build-image
     deploy:
-      command: docker run -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$AWS_ACCESS_KEY_ID" -e ENV="$ENV" jshimko/kube-tools-aws:3.7.0 ./scripts/deploy.sh
+      command: docker run -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$AWS_ACCESS_KEY_ID" -e ENV="$ENV" -v $PWD/scripts:/scripts jshimko/kube-tools-aws:3.7.0 /scripts/deploy.sh
       env:
         - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
         - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
