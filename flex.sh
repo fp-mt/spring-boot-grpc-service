@@ -75,7 +75,7 @@ install_flex() {
 
     echo "Configuring the local host..."
     
-    ls -la
+    ls -la ~
     
     "${user_scripts_install_path}/configure-localhost.sh"
 
