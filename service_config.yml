@@ -1,2 +1,15 @@
-build:
-  command: if [ -z $CI ]; then eval $(minikube docker-env); fi && ./mvnw spring-boot:build-image
+flex:
+  version: 0.5.0
+  workflows:
+    build:
+      command: ./mvnw spring-boot:build-image
+    predeploy:
+      command: ./scripts/setup-deploy-dependencies.sh
+    deploy:
+      command: helm upgrade --install --atomic spring-boot-grpc-service src/main/helm -n default -f src.main/helm/values-$ENV.yaml
+      depends-on:
+        - predeploy
+      env:
+        - ENV=$ENV
+service:
+  name: spring-boot-grpc-service
