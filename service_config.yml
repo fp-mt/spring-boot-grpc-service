@@ -3,13 +3,11 @@ flex:
   workflows:
     build:
       command: ./mvnw spring-boot:build-image
-    predeploy:
-      command: ./scripts/setup-deploy-dependencies.sh
     deploy:
-      command: helm upgrade --install --atomic spring-boot-grpc-service src/main/helm -n default -f src.main/helm/values-$ENV.yaml
-      depends-on:
-        - predeploy
+      command: docker run -e AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" -e AWS_SECRET_ACCESS_KEY="$AWS_ACCESS_KEY_ID" -e ENV="$ENV" jshimko/kube-tools-aws:3.7.0 ./scripts/deploy.sh
       env:
+        - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
         - ENV=$ENV
 service:
   name: spring-boot-grpc-service

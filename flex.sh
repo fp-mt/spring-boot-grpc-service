@@ -8,7 +8,7 @@ flex_script='flex.sh'
 auto_update="${auto_update:-1}"
 service_config_path='./service_config.yml'
 install_folder_name='.flex'
-flex_install_path="${install_path:=$pwd/${install_folder_name}}"
+flex_install_path="${install_path:=$(realpath ${install_folder_name})}"
 user_scripts_install_path="${install_path}/scripts/user"
 flex_binary_path="${flex_install_path}/flex"
 flex_version_command="${flex_binary_path} -version"

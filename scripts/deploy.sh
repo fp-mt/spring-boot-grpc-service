@@ -14,4 +14,7 @@ export AWS_SESSION_TOKEN=$(echo $OUTPUT | jq ".Credentials.SessionToken" | tr -d
 echo "--- Update kubectl config file us-east-1 region"
 aws eks update-kubeconfig --name fpff-nonprod-use1-b --region us-east-1
 chmod 600 ~/.kube/config
+
+echo "--- Deployment for EngDev04 us-east-1 region"
 kubectl config use-context arn:aws:eks:us-east-1:238801556584:cluster/fpff-nonprod-use1-b
+helm upgrade --install --atomic spring-boot-grpc-service src/main/helm -n default -f src.main/helm/values-$ENV.yaml
