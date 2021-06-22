@@ -8,10 +8,7 @@ jobs:
   deploy:
 
     runs-on: ubuntu-20.04
-    container:
-      image: jshimko/kube-tools-aws:3.7.0
-      volumes:
-        - .:/
+    container: jshimko/kube-tools-aws:3.7.0
 
     env:
       flex: "./.flex/flex"
