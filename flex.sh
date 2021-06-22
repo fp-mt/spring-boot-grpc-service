@@ -74,6 +74,9 @@ install_flex() {
     fi
 
     echo "Configuring the local host..."
+    
+    ls -la
+    
     "${user_scripts_install_path}/configure-localhost.sh"
 
     if [ "${auto_clean:=1}" == "1" ]; then
