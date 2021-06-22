@@ -12,12 +12,10 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      flex: "./.flex/flex"
+      flex: "./flex.sh"
 
     steps:
     - name: Checkout Source
       uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: ./flex.sh
     - name: Build
       run: $flex build

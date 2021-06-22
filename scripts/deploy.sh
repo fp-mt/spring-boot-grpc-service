@@ -16,4 +16,4 @@ echo "--- Deployment for EngDev04 us-east-1 region"
 kubectl config use-context arn:aws:eks:us-east-1:238801556584:cluster/fpff-nonprod-use1-b
 kubectl create namespace spring-boot-grpc-service-dev --dry-run=client -o yaml | kubectl apply -f -
 kubectl create namespace spring-boot-grpc-service-staging --dry-run=client -o yaml | kubectl apply -f -
-helm upgrade --install --atomic spring-boot-grpc-service src/main/helm -n default -f src.main/helm/values-$ENV.yaml
+helm upgrade --install --atomic spring-boot-grpc-service src/main/helm -n default -f src/main/helm/values-$ENV.yaml
