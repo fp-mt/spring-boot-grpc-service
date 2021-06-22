@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-20.04
     container:
       image: jshimko/kube-tools-aws:3.7.0
+      volumes:
+        - .:/
 
     env:
       flex: "./.flex/flex"
